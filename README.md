@@ -2,7 +2,7 @@
 ### Installation
 1. Clone the repo
    ```sh
-   git clone https://github.com/emmad-sadiq/therecrewter.git
+   git clone https://github.com/cgautamdevc14/scraper.git
    ```
 2. Install packages
    ```sh

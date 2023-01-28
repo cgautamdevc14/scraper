@@ -45,12 +45,15 @@ def parse_page(url):
             if tide == {}:
                 continue
             try:
-                time_str = tide['Time (PST)& Date']
+                if 'Time (PST)& Date' in tide.keys():
+                    time_str = tide['Time (PST)& Date']
+                else:
+                    time_str = tide['Time (EST)& Date']
                 time_str = time_str[:time_str.find('(')].strip()
                 time_data = datetime.strptime(time_str, '%I:%M %p')
                 tides_result.append(TideInfo(time_data, tide['Height'], tide['Tide']))
             except:
-                # print('Error parsing tide data')
+                print('Error parsing tide data')
                 continue
 
 
@@ -102,7 +105,10 @@ def print_result(location, day_tide_data):
 
 if __name__ == "__main__":
     inputs = [
-        ('https://www.tide-forecast.com/locations/Half-Moon-Bay-California/tides/latest', 'Half Moon Bay')
+        ('https://www.tide-forecast.com/locations/Half-Moon-Bay-California/tides/latest', 'Half Moon Bay, CA'),
+        ('https://www.tide-forecast.com/locations/Huntington-Beach/tides/latest', 'Huntington Beach, CA'),
+        ('https://www.tide-forecast.com/locations/Providence-Rhode-Island/tides/latest', 'Providence, RI'),
+        ('https://www.tide-forecast.com/locations/Wrightsville-Beach-North-Carolina/tides/latest', 'Wrightsville Beach, NC'),
     ]
 
     for url, location in inputs:
